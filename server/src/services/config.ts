@@ -150,11 +150,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
     documentId,
     ...uniqueFields
   }: { contentType: UID.ContentType; documentId: string; uniqueFields: Record<string, string> }) {
-    const sourceEntity = await strapi
-      .plugin("deep-populate")
-      .service("populate")
-      .documents(contentType)
-      .findOne({ documentId })
+    const sourceEntity = await strapi.documents(contentType).findOne({ documentId, populate: "*" })
     const targetEntity = { ...sourceEntity, ...uniqueFields }
     const contentTypes = await strapi.plugin("deep-copy").service("config").getContentTypes()
     const mutations = await prepareForCopy(
