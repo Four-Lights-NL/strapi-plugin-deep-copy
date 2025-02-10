@@ -104,11 +104,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
 
   async getInitialValues({ contentType, documentId }: { contentType: UID.ContentType; documentId: string }) {
     const contentTypes = await strapi.plugin("deep-copy").service("config").getContentTypes()
-    const entity = await strapi
-      .plugin("deep-populate")
-      .service("populate")
-      .documents(contentType)
-      .findOne({ documentId })
+    const entity = await strapi.documents(contentType).findOne({ documentId, populate: "*" })
 
     const currentData = klona(entity)
 
@@ -133,12 +129,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
     data: Record<string, string>
   }) {
     const contentTypes = await strapi.plugin("deep-copy").service("config").getContentTypes()
-    const entity = await strapi
-      .plugin("deep-populate")
-      .service("populate")
-      .documents(contentType)
-      .findOne({ documentId })
-
+    const entity = await strapi.documents(contentType).findOne({ documentId, populate: "*" })
     const currentData = { ...entity, ...data }
 
     const { editableFields } = contentTypes[contentType]
