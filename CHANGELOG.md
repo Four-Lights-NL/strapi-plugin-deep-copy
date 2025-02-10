@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.1-rc.4](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.3...v2.2.1-rc.4) (2025-02-10)
+
+### Bug Fixes
+
+* use `populate: '*'` instead of obsolete wrapped find methods ([6f0a7df](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/commit/6f0a7df06b000ba859d42f30b799a9c93c033673))
+
 ## [2.2.1-rc.3](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.2...v2.2.1-rc.3) (2025-02-10)
 
 ## [2.2.1-rc.2](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.1...v2.2.1-rc.2) (2025-02-09)
