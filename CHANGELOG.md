@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.2.1-rc.9](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.8...v2.2.1-rc.9) (2025-02-13)
+
 ## [2.2.1-rc.8](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.7...v2.2.1-rc.8) (2025-02-12)
 
 ## [2.2.1-rc.7](https://github.com/Four-Lights-NL/strapi-plugin-deep-copy/compare/v2.2.1-rc.6...v2.2.1-rc.7) (2025-02-12)
