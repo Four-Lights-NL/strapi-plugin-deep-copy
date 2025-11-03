@@ -1,8 +1,7 @@
 {
   "git": {
     "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}",
-    "requireBranch": "main"
+    "tagName": "v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
@@ -28,7 +27,8 @@
   },
   "github": {
     "release": true,
-    "assets": "*.tgz"
+    "assets": "*.tgz",
+    "releaseNotes": "node ./scripts/extract-changelog.mjs ${version}"
   },
   "npm": {
     "publish": true

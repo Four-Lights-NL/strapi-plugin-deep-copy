@@ -4,7 +4,7 @@ import uniqueCopyName from "../utils/uniqueCopyName"
 export default {
   default: {
     contentTypes: {},
-    defaultUniqueFieldsValue: (strapi, src, name) => uniqueCopyName(src[name]),
+    defaultUniqueFieldsValue: (_strapi, src, name) => uniqueCopyName(src[name]),
   } as Config,
   validator: (config) => {
     if (typeof config !== "object") {

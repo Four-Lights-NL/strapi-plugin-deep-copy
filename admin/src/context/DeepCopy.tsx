@@ -1,6 +1,6 @@
 import type { DocumentActionProps, PanelComponentProps } from "@strapi/content-manager/strapi-admin"
 import { useFetchClient } from "@strapi/strapi/admin"
-import { type ReactNode, createContext, useEffect, useState } from "react"
+import { createContext, type ReactNode, useEffect, useState } from "react"
 
 import type { ContentTypeConfig } from "#config"
 
