@@ -1,8 +1,7 @@
 import { Button, Modal } from "@strapi/design-system"
 import { useFetchClient } from "@strapi/strapi/admin"
 import { join } from "pathe"
-import { type MouseEvent, useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { type MouseEvent, useCallback, useEffect, useState } from "react"
 
 import { useDeepCopy } from "../../../hooks/useDeepCopy"
 import { PluginIcon } from "../../PluginIcon"
@@ -20,47 +19,45 @@ const DeepCopyModalFooter = ({
   onClose,
   variant = "action",
 }: DeepCopyModalFooterProps) => {
-  if (!documentId) return null
-
   const { getContext } = useDeepCopy()
   const { isReady, modelConfig, isBusy, setIsBusy, editableFieldsData, targetStatus, setErrors, setIsOpen } =
     getContext()
 
   const { editableFields } = modelConfig ?? {}
-
   const { post } = useFetchClient()
-  const _navigate = useNavigate()
-  const { pathname } = useLocation()
 
-  const handleDeepCopy = async (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const handleDeepCopy = useCallback(
+    async (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
 
-    setIsBusy(true)
-    const { data: newEntity } = await post(`/deep-copy/${model}/${documentId}`, {
-      ...editableFieldsData,
-      contentType: model,
-      sourceStatus: activeTab ?? "published", // FIXME: This should come from the form
-      targetStatus,
-    })
-    setIsBusy(false)
+      setIsBusy(true)
+      const { data: newEntity } = await post(`/deep-copy/${model}/${documentId}`, {
+        ...editableFieldsData,
+        contentType: model,
+        sourceStatus: activeTab ?? "published", // FIXME: This should come from the form
+        targetStatus,
+      })
+      setIsBusy(false)
 
-    if (!newEntity.errors) {
-      // Workaround for content-manager not being aware of our new entities
-      // FIXME: Create entities using `useDocumentActions` hook and then navigate using `react-router-dom`
-      /*
+      if (!newEntity.errors && documentId) {
+        // Workaround for content-manager not being aware of our new entities
+        // FIXME: Create entities using `useDocumentActions` hook and then navigate using `react-router-dom`
+        /*
         // navigate the user to the newly created (top-level) document
         const newEntityPath = join(pathname.replace(documentId, ""), `${newEntity.documentId}`)
         navigate(newEntityPath, { state: { from: pathname } })
        */
-      window.location.href = join(window.location.pathname.replace(documentId, ""), `${newEntity.documentId}`)
+        window.location.href = join(window.location.pathname.replace(documentId, ""), `${newEntity.documentId}`)
 
-      // NOTE: Probably superfluous as we're navigating away
-      setIsOpen(false)
-      if (onClose) onClose()
-    } else {
-      setErrors(newEntity.errors)
-    }
-  }
+        // NOTE: Probably superfluous as we're navigating away
+        setIsOpen(false)
+        if (onClose) onClose()
+      } else {
+        setErrors(newEntity.errors)
+      }
+    },
+    [activeTab, documentId, editableFieldsData, model, onClose, post, setErrors, setIsBusy, setIsOpen, targetStatus],
+  )
 
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
 
@@ -81,7 +78,9 @@ const DeepCopyModalFooter = ({
             .filter((fieldName) => editableFields[fieldName].required)
             .some((fieldName) => editableFieldsData[fieldName] === "")),
     )
-  })
+  }, [editableFields, editableFieldsData, isBusy, isReady])
+
+  if (!documentId) return null
 
   const Cancel = () => {
     const CancelButton = () => (
