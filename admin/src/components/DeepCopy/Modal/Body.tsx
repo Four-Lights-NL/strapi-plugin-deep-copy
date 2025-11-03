@@ -19,8 +19,6 @@ import { DeepCopyPlan, type DeepCopyPlanType } from "../Plan"
 import type { DeepCopyModalProps } from "./"
 
 const DeepCopyModalBody = ({ documentId, model, variant = "action" }: DeepCopyModalProps) => {
-  if (!model || !documentId) return null
-
   const { getContext } = useDeepCopy()
   const {
     modelConfig,
@@ -82,6 +80,7 @@ const DeepCopyModalBody = ({ documentId, model, variant = "action" }: DeepCopyMo
 
   const { editableFields } = modelConfig ?? {}
 
+  if (!model || !documentId) return null
   const Body = () => (
     <Flex direction="column" alignItems="stretch" gap={2}>
       <Typography id="confirm-description" variant="beta">
