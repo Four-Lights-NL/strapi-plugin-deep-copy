@@ -29,7 +29,7 @@ const DeepCopyModalFooter = ({
   const { editableFields } = modelConfig ?? {}
 
   const { post } = useFetchClient()
-  const navigate = useNavigate()
+  const _navigate = useNavigate()
   const { pathname } = useLocation()
 
   const handleDeepCopy = async (event: MouseEvent<HTMLButtonElement>) => {

@@ -1,7 +1,6 @@
 import type { Core, Schema, UID } from "@strapi/strapi"
-import slugify from "slugify"
-
 import { klona } from "klona/json"
+import slugify from "slugify"
 import type {
   ContentTypeConfig,
   EditableFields,
@@ -140,7 +139,11 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
     contentType,
     documentId,
     ...uniqueFields
-  }: { contentType: UID.ContentType; documentId: string; uniqueFields: Record<string, string> }) {
+  }: {
+    contentType: UID.ContentType
+    documentId: string
+    uniqueFields: Record<string, string>
+  }) {
     const sourceEntity = await strapi.documents(contentType).findOne({ documentId, populate: "*" })
     const targetEntity = { ...sourceEntity, ...uniqueFields }
     const contentTypes = await strapi.plugin("deep-copy").service("config").getContentTypes()

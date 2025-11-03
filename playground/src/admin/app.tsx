@@ -9,5 +9,5 @@ export default {
       },
     },
   },
-  bootstrap(app) {},
+  bootstrap(_app) {},
 }

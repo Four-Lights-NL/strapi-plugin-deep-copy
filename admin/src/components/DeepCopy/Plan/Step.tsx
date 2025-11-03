@@ -1,7 +1,6 @@
 import { Badge, Box, Card, CardBody, CardContent, CardTitle, Flex, Typography } from "@strapi/design-system"
-import type { Data, Schema, UID } from "@strapi/strapi"
-
 import { ChevronRight, Duplicate, Link } from "@strapi/icons"
+import type { Data, Schema, UID } from "@strapi/strapi"
 import type { ContentTypeConfig } from "#config"
 
 export type DeepCopyStepType = {

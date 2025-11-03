@@ -1,4 +1,4 @@
-import { type JestConfigWithTsJest, createDefaultPreset } from "ts-jest"
+import { createDefaultPreset, type JestConfigWithTsJest } from "ts-jest"
 
 const presetConfig = createDefaultPreset({
   tsconfig: "./admin/tsconfig.json",

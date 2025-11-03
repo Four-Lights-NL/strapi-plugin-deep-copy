@@ -1,7 +1,6 @@
+import type { DocumentActionProps, PanelComponentProps } from "@strapi/content-manager/strapi-admin"
 import { useContext, useMemo } from "react"
 import { useIntl } from "react-intl"
-
-import type { DocumentActionProps, PanelComponentProps } from "@strapi/content-manager/strapi-admin"
 
 import { DeepCopyContext, type DeepCopyContextType } from "../context/DeepCopy"
 
